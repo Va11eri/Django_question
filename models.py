@@ -8,7 +8,7 @@ class Author(models.Model):
     rating = models.IntegerField(default=0)
 
         def update_rating(self):
-        articles_rate = Post.objects.filter(author_id=self.pk).aggregate(sum_articles=Coalesce(Sum('rating_post'), 0))['rating_post_sum'] * 3
+        articles_rate = Post.objects.filter(author_id=self.pk).aggregate(sum_articles=Coalesce(Sum('rating_post_sum'), 0))['rating_post_sum'] * 3
         comments_rate = Comment.objects.filter(user_comment_id=self.users).aggregate(sum_articles=Coalesce(Sum('rating_comment'), 0))['rating_comment']
         comments_articles_rate = Comment.objects.filter(post_comment__author__users=self.users).aggregate(sum_posts=Coalesce(Sum('rating_comment'), 0))['rating_comment']
         self.rating = articles_rate + comments_rate + comments_articles_rate
