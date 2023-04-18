@@ -49,7 +49,7 @@ class Post(models.Model):
     time_in = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     text_post = models.TextField()
-    rating_post = models.FloatField(default=0.00)
+    rating_post = models.IntegerField(default=0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     connection_categ = models.ManyToManyField(Category, through='PostCategory')
 
